@@ -1,0 +1,178 @@
+body {
+    overflow: hidden;
+}
+
+#game-title {
+    width: 90px;
+    margin: 0 auto;
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#main {
+    margin-top: 60px;
+}
+
+#game-main {
+    margin-left: 50px;
+    float: left;
+    width: 800px;
+    height: 500px;
+    /*background-color: pink;*/
+    border: 2px solid black;
+    background-image: url("../static/img/pic.png");
+    background-size: 800px 485px;
+}
+
+#right-tool {
+    margin-right: 50px;
+    float: right;
+    width: 270px;
+    height: 500px;
+
+}
+
+#score {
+    position: fixed;
+    top: 50px; /* Adjust as needed */
+    right: 150px; /* Adjust as needed */
+    padding: 10px 20px;
+    background-color: #87ceeb; /* Blue color, you can change */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 800; /* Ensure it's above other content */
+}
+
+#error-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ff5e5e;
+    padding: 5px 15px;
+    border-radius: 15px;
+    z-index: 1000;
+    color: white;
+    font-size: 23px;
+}
+
+#success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #86bb6e;
+    padding: 5px 15px;
+    border-radius: 15px;
+    z-index: 1000;
+    color: white;
+    font-size: 23px;
+}
+
+.hidden-error {
+    display: none;
+}
+
+.hidden-success {
+    display: none;
+}
+
+
+.game-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 5px;
+    border: 2px solid black;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    background-color: #86bb6e;
+    font-weight: bold;
+    letter-spacing: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.game-button:hover {
+    background-color: #6a9457;
+}
+
+#thon1 {
+    position: fixed;
+    top: 148px; /* Adjust as needed */
+    left: 339px; /* Adjust as needed */
+    width: 30px;
+    height: 70px;
+    z-index: 100;
+    background-image: url("../static/img/dianzu.png");
+    background-size: 30px 70px;
+}
+
+#thon2 {
+    position: fixed;
+    top: 139px;
+    left: 412px;
+    width: 70px;
+    height: 30px;
+    z-index: 100;
+    background-image: url("../static/img/dianzu1.png");
+    background-size: 70px 30px; /* 调整背景图片大小 */
+}
+
+
+#thon3 {
+    position: fixed;
+    top: 148px; /* Adjust as needed */
+    left: 520px; /* Adjust as needed */
+    width: 30px;
+    height: 70px;
+    z-index: 100;
+    background-image: url("../static/img/dianzu.png");
+    background-size: 30px 70px;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #f2f2f2;
+    margin: 300px auto auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.modal-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: skyblue;
+}

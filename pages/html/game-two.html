@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第二关</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/game-two.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <script src="../static/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div>
+    <div id="game-title">第 二 关</div>
+    <div id="main">
+        <div id="game-main">
+
+        </div>
+
+        <div id="game-main-one">
+            <div id="one" index="1"></div>
+            <div id="two" index="2"></div>
+            <div id="three" index="3"></div>
+            <div id="four" index="4"></div>
+            <div id="five" index="5"></div>
+        </div>
+
+        <div id="game-main-two">
+            <div id="mone" index="1"></div>
+            <div id="mtwo" index="2"></div>
+            <div id="mthree" index="3"></div>
+            <div id="mfour" index="4"></div>
+            <div id="mfive" index="5"></div>
+            <span id="thon" index="6"></span>
+        </div>
+
+        <div id="right-tool">
+            <div class="game-button" id="adjustButton">调整状态</div>
+            <div class="game-button" id="fenlu">分路状态</div>
+            <div class="game-button" id="duangui">断轨状态</div>
+        </div>
+    </div>
+</div>
+<button class="return-to-home" onclick="window.location.href = './index.html';">返回主页</button>
+<div id="error-popup" class="hidden-error">错 误</div>
+<div id="success-popup" class="hidden-success">完成本关卡</div>
+<div id="success-popup1" class="hidden-success">正确</div>
+<div id="score">100</div>
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p>是否有电流？</p>
+        <div>
+            <button id="yesBtn" class="btn btn-yes">是</button>
+            <button id="noBtn" class="btn btn-no">否</button>
+        </div>
+    </div>
+</div>
+
+<div id="resultModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p>继电器状态</p>
+        <div>
+            <button id="up" class="btn upAndDawn">吸起</button>
+            <button id="down" class="btn upAndDawn">打落</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    var resultModal = document.getElementById("resultModal");
+
+    // Get the button that opens the modal
+    var adjustButton = document.getElementById("adjustButton");
+    var fenlu = document.getElementById("fenlu");
+    var duangui = document.getElementById("duangui");
+
+    // Get the yes and no buttons
+    var yesBtn = document.getElementById("yesBtn");
+    var noBtn = document.getElementById("noBtn");
+
+    var up = document.getElementById("up");
+    var down = document.getElementById("down");
+
+    let clickFlag = 0;
+    // When the user clicks the button, open the modal
+    adjustButton.onclick = function () {
+        clickFlag = 0;
+        modal.style.display = "block";
+    }
+
+    fenlu.onclick = function () {
+        clickFlag = 1;
+        modal.style.display = "block";
+    }
+
+    duangui.onclick = function () {
+        clickFlag = 2;
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on yes button, close the modal
+    yesBtn.onclick = function () {
+        modal.style.display = "none";
+        // Place your logic here for when the user selects 'Yes'
+        console.log("有电流");
+        // 根据 clickFlag 的值来决定显示哪个游戏主界面
+        if (clickFlag === 0) {
+            document.getElementById("game-main-one").style.display = "block";
+            document.getElementById("game-main-two").style.display = "none";
+        } else if (clickFlag === 1) {
+            document.getElementById("game-main-one").style.display = "none";
+            document.getElementById("game-main-two").style.display = "block";
+        }
+
+        if (clickFlag === 0) {
+            let index = 1
+            // 获取 game-main-one 下的所有 div 元素
+            const gameMainDivs = document.querySelectorAll('#game-main-one div');
+            console.log(gameMainDivs)
+            // 为每个 div 元素添加点击事件
+            gameMainDivs.forEach(div => {
+                div.addEventListener('click', function () {
+                    // 获取点击的元素的 index 属性值
+                    let clickedIndex = parseInt(this.getAttribute('index'));
+
+                    // 判断点击的元素的 index 是否与 index 变量相等
+                    if (clickedIndex === index) {
+                        // 如果相等，则将 index 加1
+                        index++;
+                        // 添加名为 "to-red" 的类
+                        this.classList.add('to-red');
+                        if (index === 6) {
+                            resultModal.style.display = "block";
+                        }
+                    } else {
+                        // 获取当前分数
+                        let scoreElement = document.getElementById("score");
+                        let currentScore = parseInt(scoreElement.textContent);
+
+                        // 减少分数
+                        let newScore = currentScore - 12;
+
+                        // 更新分数显示
+                        scoreElement.textContent = newScore.toString();
+
+                        // 如果不相等，则触发错误提示
+                        let errorPopup = document.getElementById("error-popup");
+                        errorPopup.classList.remove("hidden-error");
+
+                        // 一段时间后隐藏错误提示
+                        setTimeout(function () {
+                            errorPopup.classList.add("hidden-error");
+                        }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+                    }
+
+
+                });
+            });
+        }
+        if (clickFlag === 1) {
+            let index = 1
+            // 获取 game-main-two 下的所有 div 元素
+            const gameMainDivs = document.querySelectorAll('#game-main-two div');
+            console.log(gameMainDivs)
+            // 为每个 div 元素添加点击事件
+            gameMainDivs.forEach(div => {
+                div.addEventListener('click', function () {
+                    // 获取点击的元素的 index 属性值
+                    let clickedIndex = parseInt(this.getAttribute('index'));
+
+                    // 判断点击的元素的 index 是否与 index 变量相等
+                    if (clickedIndex === index) {
+                        // 如果相等，则将 index 加1
+                        index++;
+                        // 添加名为 "to-red" 的类
+                        this.classList.add('to-red');
+                        if (index === 6) {
+                            resultModal.style.display = "block";
+                        }
+                    } else {
+                        // 获取当前分数
+                        let scoreElement = document.getElementById("score");
+                        let currentScore = parseInt(scoreElement.textContent);
+
+                        // 减少分数
+                        let newScore = currentScore - 12;
+
+                        // 更新分数显示
+                        scoreElement.textContent = newScore.toString();
+
+                        // 如果不相等，则触发错误提示
+                        let errorPopup = document.getElementById("error-popup");
+                        errorPopup.classList.remove("hidden-error");
+
+                        // 一段时间后隐藏错误提示
+                        setTimeout(function () {
+                            errorPopup.classList.add("hidden-error");
+                        }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+                    }
+
+
+                });
+            });
+        }
+        if (clickFlag === 2) {
+            // 如果不相等，则触发错误提示
+            let errorPopup = document.getElementById("error-popup");
+            errorPopup.classList.remove("hidden-error");
+
+            // 一段时间后隐藏错误提示
+            setTimeout(function () {
+                errorPopup.classList.add("hidden-error");
+            }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+        }
+    }
+
+    // When the user clicks on no button, close the modal
+    noBtn.onclick = function () {
+        modal.style.display = "none";
+        if (clickFlag === 2) {
+            // 显示正确提示
+            let successPopup = document.getElementById("success-popup");
+            successPopup.classList.remove("hidden-success");
+
+            // 一段时间后隐藏正确提示
+            setTimeout(function () {
+                successPopup.classList.add("hidden-success");
+
+                // 加一个最后的弹窗
+                resultModal.style.display = "block";
+
+            }, 1000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+            return
+        }
+
+        // 获取当前分数
+        let scoreElement = document.getElementById("score");
+        let currentScore = parseInt(scoreElement.textContent);
+
+        // 减少分数
+        let newScore = currentScore - 12;
+
+        // 更新分数显示
+        scoreElement.textContent = newScore.toString();
+
+        // 显示错误提示
+        let errorPopup = document.getElementById("error-popup");
+        errorPopup.classList.remove("hidden-error");
+
+        // 一段时间后隐藏错误提示
+        setTimeout(function () {
+            errorPopup.classList.add("hidden-error");
+        }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    up.onclick = function () {
+        resultModal.style.display = "none";
+        if (clickFlag === 0) {
+            // 显示正确提示
+            let successPopup1 = document.getElementById("success-popup1");
+            successPopup1.classList.remove("hidden-success");
+            setTimeout(function () {
+                successPopup1.classList.add("hidden-success");
+            }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+        }
+
+        if (clickFlag === 1 || clickFlag === 2) {
+            // 显示错误提示
+            let errorPopup = document.getElementById("error-popup");
+            errorPopup.classList.remove("hidden-error");
+            // 一段时间后隐藏错误提示
+            setTimeout(function () {
+                errorPopup.classList.add("hidden-error");
+            }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+        }
+    }
+
+    down.onclick = function () {
+        resultModal.style.display = "none";
+        if (clickFlag === 0) {
+            // 显示错误提示
+            let errorPopup = document.getElementById("error-popup");
+            errorPopup.classList.remove("hidden-error");
+            // 一段时间后隐藏错误提示
+            setTimeout(function () {
+                errorPopup.classList.add("hidden-error");
+            }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+        }
+
+        if (clickFlag === 1 || clickFlag === 2) {
+            // 显示正确提示
+            let successPopup1 = document.getElementById("success-popup1");
+            successPopup1.classList.remove("hidden-success");
+            setTimeout(function () {
+                successPopup1.classList.add("hidden-success");
+            }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+        }
+
+    }
+
+
+</script>
+</html>

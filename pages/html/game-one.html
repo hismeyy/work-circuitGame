@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一关</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/game-one.css">
+    <script src="../static/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div>
+    <div id="game-title">第 一 关</div>
+    <div id="main">
+        <div id="game-main">
+            <div id="one" index="1"></div>
+            <div id="two" index="2"></div>
+            <div id="three" index="3"></div>
+            <div id="four" index="4"></div>
+            <div id="five" index="5"></div>
+            <div id="six" index="6"></div>
+        </div>
+        <div id="right-tool">
+            <div index="1" class="img" draggable="true" style="background-image: url('../static/img/1.png');"></div>
+            <div index="2" class="img" draggable="true" style="background-image: url('../static/img/2.png');"></div>
+            <div index="3" class="img" draggable="true" style="background-image: url('../static/img/3.png');"></div>
+            <div index="4" class="img" draggable="true" style="background-image: url('../static/img/4.png');"></div>
+            <div index="5" class="img" draggable="true" style="background-image: url('../static/img/5.png');"></div>
+            <div index="6" class="img" draggable="true" style="background-image: url('../static/img/6.png');"></div>
+        </div>
+    </div>
+</div>
+<button class="return-to-home" onclick="window.location.href = './index.html';">返回主页</button>
+<div id="error-popup" class="hidden-error">错 误</div>
+<div id="success-popup" class="hidden-success">正 确</div>
+<div id="score">100</div>
+</body>
+<script>
+    // 获取所有可拖拽的元素
+    const draggables = document.querySelectorAll('.img');
+
+    // 添加拖拽事件监听器
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            // 记录拖拽的元素
+            draggable.classList.add('dragging');
+        });
+
+        draggable.addEventListener('dragend', () => {
+            // 移除拖拽时添加的样式
+            draggable.classList.remove('dragging');
+
+            // 获取拖拽结束时的位置
+            const dropZone = document.elementFromPoint(event.clientX, event.clientY);
+
+            // 打印位置的元素
+            let indexValue1 = dropZone.getAttribute("index");
+            let indexValue2 = draggable.getAttribute("index");
+
+            if(indexValue1 === undefined || indexValue1 === null){
+                return
+            }
+            if (indexValue1 !== indexValue2) {
+                // 获取当前分数
+                let scoreElement = document.getElementById("score");
+                let currentScore = parseInt(scoreElement.textContent);
+
+                // 减少分数
+                let newScore = currentScore - 16;
+
+                // 更新分数显示
+                scoreElement.textContent = newScore.toString();
+
+                // 显示错误提示
+                let errorPopup = document.getElementById("error-popup");
+                errorPopup.classList.remove("hidden-error");
+
+                // 一段时间后隐藏错误提示
+                setTimeout(function () {
+                    errorPopup.classList.add("hidden-error");
+                }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+            } else {
+                // 显示正确提示
+                let successPopup = document.getElementById("success-popup");
+                successPopup.classList.remove("hidden-success");
+
+                // 一段时间后隐藏正确提示
+                setTimeout(function () {
+                    successPopup.classList.add("hidden-success");
+                }, 2000); // 这里的2000表示2秒后隐藏，你可以根据需要调整时间
+            }
+
+        });
+    });
+</script>
+</html>

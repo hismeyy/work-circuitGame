@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第三关</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/game-three.css">
+    <script src="../static/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<div id="game-title">第 三 关</div>
+<div id="main">
+    <div id="game-main">
+        <span id="thon1" index="1"></span>
+        <span id="thon2" index="2"></span>
+        <span id="thon3" index="3"></span>
+    </div>
+    <div id="right-tool">
+        <div class="game-button" id="one-button">调整状态</div>
+        <div class="game-button" id="two-button">分路状态</div>
+    </div>
+</div>
+</div>
+<button class="return-to-home" onclick="window.location.href = './index.html';">返回主页</button>
+<div id="error-popup" class="hidden-error">错 误</div>
+<div id="success-popup" class="hidden-success">正 确</div>
+<div id="score">100</div>
+<button class="return-to-home" onclick="window.location.href = './index.html';">返回主页</button>
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p>选择合适电阻</p>
+        <div>
+            <button id="btn1" class="btn">12</button>
+            <button id="btn2" class="btn">13</button>
+            <button id="btn3" class="btn">14</button>
+            <button id="btn4" class="btn">15</button>
+        </div>
+    </div>
+</div>
+<div id="myModal-two" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p>选择合适电阻</p>
+        <div>
+            <button id="tbtn1" class="btn">12</button>
+            <button id="tbtn2" class="btn">13</button>
+            <button id="tbtn3" class="btn">14</button>
+            <button id="tbtn4" class="btn">15</button>
+            <button id="tbtn5" class="btn">14</button>
+            <button id="tbtn6" class="btn">15</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var start = 0;
+    var modal = document.getElementById("myModal");
+    var modalTwo = document.getElementById("myModal-two");
+    // Get thon1, thon2, and thon3 elements
+    var thon1 = document.getElementById("thon1");
+    var thon2 = document.getElementById("thon2");
+    var thon3 = document.getElementById("thon3");
+
+    // Add click event listener to thon1
+    thon1.addEventListener("click", function () {
+        // Get the index attribute of thon1
+        var index = thon1.getAttribute("index");
+        // Do something with the index
+        // You can add your desired functionality here
+        if (start === 1) {
+            modal.style.display = "block";
+        }
+        if (start === 2) {
+            modalTwo.style.display = "block";
+        }
+    });
+
+    // Add click event listener to thon2
+    thon2.addEventListener("click", function () {
+        // Get the index attribute of thon2
+        var index = thon2.getAttribute("index");
+        // Do something with the index
+        console.log("thon2 clicked, index:", index);
+        // You can add your desired functionality here
+        if (start === 1) {
+            modal.style.display = "block";
+        }
+        if (start === 2) {
+            modalTwo.style.display = "block";
+        }
+    });
+
+    // Add click event listener to thon3
+    thon3.addEventListener("click", function () {
+        // Get the index attribute of thon3
+        var index = thon3.getAttribute("index");
+        // Do something with the index
+        console.log("thon3 clicked, index:", index);
+        // You can add your desired functionality here
+        if (start === 1) {
+            modal.style.display = "block";
+        }
+        if (start === 2) {
+            modalTwo.style.display = "block";
+        }
+    });
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+
+        if (event.target === modalTwo) {
+            modalTwo.style.display = "none";
+        }
+    }
+
+    var oneBut = document.getElementById("one-button");
+    var TwoBut = document.getElementById("two-button");
+
+    oneBut.addEventListener("click", function () {
+        start = 1;
+    })
+
+    TwoBut.addEventListener("click", function () {
+        start = 2;
+    })
+
+</script>
+</html>
